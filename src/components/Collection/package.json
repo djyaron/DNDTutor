@@ -1,0 +1,6 @@
+{
+  "name": "Collection",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Collection.js"
+}

@@ -1,0 +1,6 @@
+{
+  "name": "WorkSpace",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./WorkSpace.js"
+}

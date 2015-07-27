@@ -1,0 +1,9 @@
+@import '../variables.css';
+
+.ProblemStatementHeader {
+	font-weight: bold;
+	font-family: 'Open Sans';
+	font-size: 20px;
+	text-align: center;
+	margin: 10px 0px;
+}
