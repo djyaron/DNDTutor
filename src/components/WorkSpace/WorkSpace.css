@@ -2,11 +2,11 @@
 
 .WorkSpaceBox {
 	border: 1px solid black;
-    position: relative;
-    width: 70%;
-    height: 0;
-    padding-bottom: 15%;
-    float: left;
-    box-sizing: border-box;
-    margin: 20px 0px;
+	box-sizing: border-box;
+
+	flex: 0 1 70%;
+    display: inherit;
+
+    height: 90%;
+    justify-content: center;
 }

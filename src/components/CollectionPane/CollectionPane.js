@@ -12,12 +12,17 @@ class CollectionPane {
   render() {
   	var Collections = this.props.collections.map(function(collection) {
       return (
-      	<Collection CollType={collection} />
+      	<Collection CollType={collection} key={collection} />
       );
     }, this);
     return (
-      <div className="CollectionTabs">
-      	{Collections}
+      <div className="CollectionPane">
+        <div className="CollectionTabs">
+        	{Collections}
+        </div>
+        <div className="CollectionCurrent">
+          <Expression ExpType={"dunno"} />
+        </div>
       </div>
     );
   }
