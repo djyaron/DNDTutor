@@ -1,12 +1,36 @@
 @import '../variables.css';
 
-.CollectionTabs {
+.CollectionPane {
 	border: 1px solid black;
-    position: relative;
-    width: 30%;
-    height: 0;
-    padding-bottom: 15%;
-    float: left;
-    box-sizing: border-box;
-    margin: 20px 0px;
+	box-sizing: border-box;
+
+	flex: 0 1 30%;
+    display: inherit;
+
+    height: 90%;
+    flex-flow: row wrap;
+}
+
+.CollectionTabs {
+	display: inherit;
+	height: 10%;
+	flex: 0 1 100%;
+}
+
+.CollectionTabs > div {
+	border-bottom: 1px solid black;
+	box-sizing: border-box;
+
+	flex: 0 1 33.3333%;
+
+	display: inherit;
+    justify-content: center;
+}
+
+.CollectionCurrent {
+
+	flex: 0 1 100%;
+	display: inherit;
+
+	height: 90%;
 }

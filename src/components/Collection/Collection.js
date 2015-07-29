@@ -10,7 +10,7 @@ class Collection {
 
   render() {
     return (
-      <div className="CollectionTabs">
+      <div>
       	{this.props.CollType}
       </div>
     );

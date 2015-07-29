@@ -4,6 +4,8 @@ import withStyles from '../../decorators/withStyles';
 import ProblemStatement from '../ProblemStatement';
 import WorkSpace from '../WorkSpace';
 import CollectionPane from '../CollectionPane';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd/modules/backends/HTML5';
 
 var SampleProblemStatement = "This is a sample problem statement.";
 var SampleCollections = ["TEMPLATES","GIVENS","MW"];
@@ -28,4 +30,4 @@ class TutPage {
   }
 }
 
-export default TutPage;
+export default DragDropContext(HTML5Backend)(TutPage);
