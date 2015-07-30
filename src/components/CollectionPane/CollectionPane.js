@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import styles from './CollectionPane.css';
 import withStyles from '../../decorators/withStyles';
-import Expression from '../Expression';
 import Collection from '../Collection';
+import Expression from '../Expression';
+import Term from '../Term';
 
-var ExpSingle = "E_SINGLE";
+var ExpPlus = "EPLUS";
+var TermABC = "ABC";
 
 @withStyles(styles)
 class CollectionPane {
+
+  static propTypes = {
+    collections: PropTypes.array.isRequired
+  };
 
   render() {
   	var Collections = this.props.collections.map(function(collection) {
@@ -21,7 +27,8 @@ class CollectionPane {
         	{Collections}
         </div>
         <div className="CollectionCurrent">
-          <Expression ExpType={"dunno"} />
+          <Expression ExpType={ExpPlus} />
+          <Term TermType={TermABC} />
         </div>
       </div>
     );

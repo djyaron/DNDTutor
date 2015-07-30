@@ -5,10 +5,10 @@
 	box-sizing: border-box;
 
 	flex: 0 1 30%;
-    display: inherit;
+  display: inherit;
 
-    height: 90%;
-    flex-flow: row wrap;
+  height: 90%;
+  flex-flow: row wrap;
 }
 
 .CollectionTabs {
@@ -22,15 +22,12 @@
 	box-sizing: border-box;
 
 	flex: 0 1 33.3333%;
-
 	display: inherit;
-    justify-content: center;
+  justify-content: center;
 }
 
 .CollectionCurrent {
-
-	flex: 0 1 100%;
-	display: inherit;
-
+  display: inherit;
 	height: 90%;
+  flex: 0 1 100%;
 }

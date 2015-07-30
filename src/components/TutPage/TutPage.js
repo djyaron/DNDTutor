@@ -4,6 +4,7 @@ import withStyles from '../../decorators/withStyles';
 import ProblemStatement from '../ProblemStatement';
 import WorkSpace from '../WorkSpace';
 import CollectionPane from '../CollectionPane';
+
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd/modules/backends/HTML5';
 
@@ -20,13 +21,13 @@ class TutPage {
   render() {
     let title = 'Drag and Drop Tutor';
    	this.context.onSetTitle(title);
-	return (
-	  <div className="TutPage">
-		<ProblemStatement statement={SampleProblemStatement} />
-		<WorkSpace />
-		<CollectionPane collections={SampleCollections} />
-	  </div>
-	);
+  	return (
+  	  <div className="TutPage">
+    		<ProblemStatement statement={SampleProblemStatement} />
+    		<WorkSpace />
+    		<CollectionPane collections={SampleCollections} />
+  	  </div>
+  	);
   }
 }
 

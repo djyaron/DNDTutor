@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import styles from './Collection.css';
 import withStyles from '../../decorators/withStyles';
-import Expression from '../Expression';
-
-var ExpSingle = "E_SINGLE";
 
 @withStyles(styles)
 class Collection {
+
+  static propTypes = {
+    CollType: PropTypes.string.isRequired
+  };
 
   render() {
     return (

@@ -1,14 +1,12 @@
 import React, { PropTypes } from 'react';
 import { ItemTypes } from '../../constants/ItemTypes';
 import { DragSource } from 'react-dnd';
-import styles from './Expression.css';
+import styles from './Term.css';
 import withStyles from '../../decorators/withStyles';
 
-import { holdExpressionProps } from '../../actions/ExprTreeActionCreators'
-
-const expSource = {
+const termSource = {
   beginDrag(props) {
-    holdExpressionProps(props);
+    console.log(props);
     return props;
   }
 };
@@ -21,22 +19,22 @@ function collect(connect, monitor) {
 }
 
 @withStyles(styles)
-class Expression {
+class Term {
 
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
     isDragging: PropTypes.bool.isRequired,
-    ExpType: PropTypes.string.isRequired
+    TermType: PropTypes.string.isRequired
   };
 
   render() {
     const { connectDragSource, isDragging } = this.props;
   	return connectDragSource(
-  	  <div className="expression">
-  	    {this.props.ExpType}
+  	  <div className="term">
+  	    {this.props.TermType}
   	  </div>
   	);
   }
 }
 
-export default DragSource(ItemTypes.EXPR, expSource, collect)(Expression);
+export default DragSource(ItemTypes.TERM, termSource, collect)(Term);

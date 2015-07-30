@@ -2,8 +2,7 @@
 
 .TutPage {
 	display: flex;
-	flex-direction: row;
-    flex-wrap: wrap;
+  flex-flow: row wrap;
 
-    height: 300px;
+  height: 300px;
 }

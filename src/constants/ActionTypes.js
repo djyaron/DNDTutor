@@ -3,5 +3,6 @@
 import keyMirror from 'react/lib/keyMirror';
 
 export default keyMirror({
-  CHANGE_LOCATION: null
+  CHANGE_LOCATION: null,
+  HOLD_EPROPS: null
 });

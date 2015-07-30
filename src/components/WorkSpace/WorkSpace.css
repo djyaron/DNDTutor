@@ -5,8 +5,8 @@
 	box-sizing: border-box;
 
 	flex: 0 1 70%;
-    display: inherit;
+  display: inherit;
 
-    height: 90%;
-    justify-content: center;
+  height: 90%;
+  justify-content: center;
 }
