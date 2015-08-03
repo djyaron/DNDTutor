@@ -4,5 +4,7 @@ import keyMirror from 'react/lib/keyMirror';
 
 export default keyMirror({
   CHANGE_LOCATION: null,
-  HOLD_EPROPS: null
+  HOLD_EPROPS: null,
+  HOLD_TPROPS: null,
+  DROP_PROPS: null
 });

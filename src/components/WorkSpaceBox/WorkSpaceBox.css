@@ -1,0 +1,7 @@
+.WorkSpaceBox {
+  display: inherit;
+  border: 1px solid black;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,24 +1,11 @@
 import React, { PropTypes } from 'react';
 import styles from './WorkSpace.css';
 import withStyles from '../../decorators/withStyles';
-import { ItemTypes } from '../../constants/ItemTypes';
-import { DropTarget } from 'react-dnd';
 
 import ExprTreeStore from '../../stores/ExprTreeStore';
 
-const workSpaceTarget = {
-  drop(props) {
-    console.log(props);
-    return {};
-  }
-};
-
-function collect(connect, monitor) {
-  return {
-    connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver()
-  };
-}
+import WorkSpaceBox from '../WorkSpaceBox';
+import WorkSpaceExpr from '../WorkSpaceExpr';
 
 function getStateFromStores() {
   return {
@@ -27,19 +14,53 @@ function getStateFromStores() {
 }
 
 @withStyles(styles)
-class WorkSpace {
+class WorkSpace extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = getStateFromStores();
+    this.onChange = this.onChange.bind(this);
+  }
 
-  static propTypes = {
-    isOver: PropTypes.bool.isRequired
-  };
+  componentDidMount() {
+    ExprTreeStore.addChangeListener(this.onChange);
+  }
+
+  componentWillUnmount() {
+    ExprTreeStore.removeChangeListener(this.onChange);
+  }
+
+  onChange() {
+    this.setState(getStateFromStores());
+  }
 
 	render() {
-    const { connectDropTarget, isOver } = this.props;
-    return connectDropTarget(
-      <div className="WorkSpaceBox">
-      </div>
-    );
+    switch (this.state.exprTree.type) {
+
+      case "OperatorNode":
+        var exprTree = this.state.exprTree;
+        return (
+          <div className="WorkSpace">
+            <WorkSpaceExpr ExprMid={exprTree.op}
+                           ExprA={exprTree.args[0]}
+                           ExprB={exprTree.args[1]}
+                           ExprType={"Double"} />
+          </div>
+        );
+
+      default:
+        var ExprInit = {};
+        ExprInit.name = "Empty";
+        ExprInit.number = 0;
+        return (
+          <div className="WorkSpace">
+            <WorkSpaceExpr ExprA={ExprInit}
+                           ExprType={"Single"} />
+          </div>
+        );
+    }
+
 	}
+
 }
 
-export default DropTarget(ItemTypes.EXPR, workSpaceTarget, collect)(WorkSpace);
+export default WorkSpace;

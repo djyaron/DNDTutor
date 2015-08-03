@@ -26,7 +26,9 @@ class Expression {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
     isDragging: PropTypes.bool.isRequired,
-    ExpType: PropTypes.string.isRequired
+    ExpType: PropTypes.string.isRequired,
+    ExpA: PropTypes.string.isRequired,
+    ExpB: PropTypes.string.isRequired
   };
 
   render() {

@@ -5,7 +5,7 @@ import Collection from '../Collection';
 import Expression from '../Expression';
 import Term from '../Term';
 
-var ExpPlus = "EPLUS";
+var ExpPlus = "+";
 var TermABC = "ABC";
 
 @withStyles(styles)
@@ -27,7 +27,7 @@ class CollectionPane {
         	{Collections}
         </div>
         <div className="CollectionCurrent">
-          <Expression ExpType={ExpPlus} />
+          <Expression ExpType={ExpPlus} ExpA={"Empty"} ExpB={"Empty"} />
           <Term TermType={TermABC} />
         </div>
       </div>
