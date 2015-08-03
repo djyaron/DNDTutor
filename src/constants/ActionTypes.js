@@ -6,5 +6,6 @@ export default keyMirror({
   CHANGE_LOCATION: null,
   HOLD_EPROPS: null,
   HOLD_TPROPS: null,
-  DROP_PROPS: null
+  DROP_PROPS: null,
+  SELECT_COLL: null
 });
