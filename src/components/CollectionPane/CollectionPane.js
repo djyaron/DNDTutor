@@ -8,8 +8,10 @@ import Term from '../Term';
 import CollectionPaneStore from '../../stores/CollectionPaneStore';
 
 var ExpPlus = "+";
-var TermABC = "ABC";
-var TermDEF = "DEF";
+var TermValueZero = 0;
+var TermValueOne = 1;
+var TermUnitZero = "UZ";
+var TermUnitOne = "UO";
 
 function getStateFromStores() {
   return {
@@ -44,7 +46,7 @@ class CollectionPane extends React.Component {
   render() {
   	var Collections = this.props.collections.map(function(collection) {
       return (
-      	<Collection CollType={collection} key={collection} />
+      	<Collection CollType={collection} key={collection} currColl={this.state.currentCollection} />
       );
     }, this);
     switch (this.state.currentCollection) {
@@ -67,7 +69,7 @@ class CollectionPane extends React.Component {
               {Collections}
             </div>
             <div className="CollectionCurrent">
-              <Term TermType={TermABC} />
+              <Term TermValue={TermValueZero} TermUnit={TermUnitZero} />
             </div>
           </div>
         );
@@ -79,7 +81,7 @@ class CollectionPane extends React.Component {
               {Collections}
             </div>
             <div className="CollectionCurrent">
-              <Term TermType={TermDEF} />
+              <Term TermValue={TermValueOne} TermUnit={TermUnitOne} />
             </div>
           </div>
         );

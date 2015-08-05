@@ -1,5 +1,6 @@
-.expression {
+.Expression {
   display: inherit;
   padding: 15px;
-  height: 10%;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
 }

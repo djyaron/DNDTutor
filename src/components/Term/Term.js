@@ -4,9 +4,11 @@ import { DragSource } from 'react-dnd';
 import styles from './Term.css';
 import withStyles from '../../decorators/withStyles';
 
+import { holdTermProps } from '../../actions/ExprTreeActionCreators'
+
 const termSource = {
   beginDrag(props) {
-    console.log(props);
+    holdTermProps(props);
     return props;
   }
 };
@@ -24,17 +26,18 @@ class Term {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
     isDragging: PropTypes.bool.isRequired,
-    TermType: PropTypes.string.isRequired
+    TermValue: PropTypes.number.isRequired,
+    TermUnit: PropTypes.string.isRequired
   };
 
   render() {
     const { connectDragSource, isDragging } = this.props;
   	return connectDragSource(
   	  <div className="term">
-  	    {this.props.TermType}
+  	    {this.props.TermValue + " " + this.props.TermUnit}
   	  </div>
   	);
   }
 }
 
-export default DragSource(ItemTypes.TERM, termSource, collect)(Term);
+export default DragSource(ItemTypes.DND, termSource, collect)(Term);

@@ -34,11 +34,11 @@ class Expression {
   render() {
     const { connectDragSource, isDragging } = this.props;
   	return connectDragSource(
-  	  <div className="expression">
+  	  <div className="Expression">
   	    {this.props.ExpType}
   	  </div>
   	);
   }
 }
 
-export default DragSource(ItemTypes.EXPR, expSource, collect)(Expression);
+export default DragSource(ItemTypes.DND, expSource, collect)(Expression);

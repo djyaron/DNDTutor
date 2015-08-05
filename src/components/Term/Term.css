@@ -1,5 +1,6 @@
 .term {
   padding: 15px;
   display: inherit;
-  height: 10%;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
 }

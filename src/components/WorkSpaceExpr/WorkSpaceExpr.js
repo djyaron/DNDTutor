@@ -15,7 +15,8 @@ class WorkSpaceExpr {
       case "Single":
         return (
           <div className="WorkSpaceExpr">
-            <WorkSpaceBox BoxType={this.props.ExprA.name}
+            <WorkSpaceBox BoxValue={this.props.ExprA.value}
+                          BoxType={this.props.ExprA.name}
                           BoxNumber={this.props.ExprA.number} />
           </div>
         );
@@ -46,14 +47,16 @@ class WorkSpaceExpr {
                              ExprB={ExprA.args[1]}
                              ExprType={"Double"} />
               <div className="WorkSpaceExprMid"> {this.props.ExprMid} </div>
-              <WorkSpaceBox BoxType={ExprB.name}
+              <WorkSpaceBox BoxValue={ExprB.value}
+                            BoxType={ExprB.name}
                             BoxNumber={ExprB.number} />
             </div>
           );
         } else if (ExprB.isOperatorNode) {
           return (
             <div className="WorkSpaceExpr">
-              <WorkSpaceBox BoxType={ExprA.name}
+              <WorkSpaceBox BoxValue={ExprA.value}
+                            BoxType={ExprA.name}
                             BoxNumber={ExprA.number} />
               <div className="WorkSpaceExprMid"> {this.props.ExprMid} </div>
               <WorkSpaceExpr ExprMid={ExprB.op}
@@ -65,10 +68,12 @@ class WorkSpaceExpr {
         } else {
           return (
             <div className="WorkSpaceExpr">
-              <WorkSpaceBox BoxType={ExprA.name}
+              <WorkSpaceBox BoxValue={ExprA.value}
+                            BoxType={ExprA.name}
                             BoxNumber={ExprA.number} />
               <div className="WorkSpaceExprMid"> {this.props.ExprMid} </div>
-              <WorkSpaceBox BoxType={ExprB.name}
+              <WorkSpaceBox BoxValue={ExprB.value}
+                            BoxType={ExprB.name}
                             BoxNumber={ExprB.number} />
             </div>
           );

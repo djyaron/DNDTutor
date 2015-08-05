@@ -25,18 +25,27 @@ class WorkSpaceBox {
   static propTypes = {
     connectDropTarget: PropTypes.func.isRequired,
     isOver: PropTypes.bool.isRequired,
+    BoxValue: PropTypes.string,
     BoxType: PropTypes.string.isRequired,
     BoxNumber: PropTypes.number.isRequired
   };
 
   render() {
     const { connectDropTarget, isOver } = this.props;
-    return connectDropTarget(
-      <div className="WorkSpaceBox">
-        {this.props.BoxType + " " + this.props.BoxNumber}
-      </div>
-    );
+    if (this.props.BoxValue === undefined) {
+      return connectDropTarget(
+        <div className="WorkSpaceBox">
+          {"type:"+this.props.BoxType+" number:"+this.props.BoxNumber}
+        </div>
+      );
+    } else {
+      return connectDropTarget(
+        <div className="WorkSpaceBox">
+          {"value:"+this.props.BoxValue+" type:"+this.props.BoxType+" number:"+this.props.BoxNumber}
+        </div>
+      );
+    }
   }
 }
 
-export default DropTarget(ItemTypes.EXPR, workSpaceBoxTarget, collect)(WorkSpaceBox);
+export default DropTarget(ItemTypes.DND, workSpaceBoxTarget, collect)(WorkSpaceBox);

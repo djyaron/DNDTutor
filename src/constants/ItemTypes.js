@@ -1,4 +1,5 @@
 export const ItemTypes = {
   EXPR: 'expression',
-  TERM: 'term'
+  TERM: 'term',
+  DND: 'dnd'
 };

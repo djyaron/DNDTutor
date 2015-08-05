@@ -1,1 +1,10 @@
-@import '../variables.css';
+.Collection {
+  background-color: #fff;
+  color: #000;
+  cursor: pointer;
+}
+
+.Active {
+  background-color: #000;
+  color: #fff;
+}
