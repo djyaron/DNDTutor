@@ -8,7 +8,7 @@ import { dropHeldExpression } from '../../actions/ExprTreeActionCreators'
 
 const workSpaceBoxTarget = {
   drop(props) {
-    dropHeldExpression(props.BoxNumber);
+    if (props.BoxType === "Empty") { console.log("what"); dropHeldExpression(props.BoxNumber); }
     return {};
   }
 };
@@ -35,13 +35,13 @@ class WorkSpaceBox {
     if (this.props.BoxValue === undefined) {
       return connectDropTarget(
         <div className="WorkSpaceBox">
-          {"type:"+this.props.BoxType+" number:"+this.props.BoxNumber}
+          {"t:"+this.props.BoxType+" no:"+this.props.BoxNumber}
         </div>
       );
     } else {
       return connectDropTarget(
         <div className="WorkSpaceBox">
-          {"value:"+this.props.BoxValue+" type:"+this.props.BoxType+" number:"+this.props.BoxNumber}
+          {"val:"+this.props.BoxValue+" t:"+this.props.BoxType+" no:"+this.props.BoxNumber}
         </div>
       );
     }

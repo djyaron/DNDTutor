@@ -39,7 +39,7 @@ class WorkSpace extends React.Component {
       if (et.isConstantNode) {
         return (
           <div className="WorkSpace">
-            <WorkSpaceExpr ExprA={{"value":et.value,"name":et.unit,"number":et.number}}
+            <WorkSpaceExpr ExprA={{"value":et.value,"name":et.name,"number":et.number}}
                            ExprType={"Single"} />
           </div>
         );
