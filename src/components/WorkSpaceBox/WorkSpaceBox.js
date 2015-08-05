@@ -8,7 +8,7 @@ import { dropHeldExpression } from '../../actions/ExprTreeActionCreators'
 
 const workSpaceBoxTarget = {
   drop(props) {
-    if (props.BoxType === "Empty") { console.log("what"); dropHeldExpression(props.BoxNumber); }
+    if (props.BoxType === "Empty") { dropHeldExpression(props.BoxNumber); }
     return {};
   }
 };
