@@ -35,13 +35,17 @@ class WorkSpaceBox {
     if (this.props.BoxValue === undefined) {
       return connectDropTarget(
         <div className="WorkSpaceBox">
-          {"t:"+this.props.BoxType+" no:"+this.props.BoxNumber}
+          <div className="WorkSpaceBoxWrap">
+            {this.props.BoxType}
+          </div>
         </div>
       );
     } else {
       return connectDropTarget(
         <div className="WorkSpaceBox">
-          {"val:"+this.props.BoxValue+" t:"+this.props.BoxType+" no:"+this.props.BoxNumber}
+          <div className="WorkSpaceBoxWrap">
+            {this.props.BoxValue+" "+this.props.BoxType}
+          </div>
         </div>
       );
     }

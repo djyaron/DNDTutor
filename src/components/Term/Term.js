@@ -33,7 +33,7 @@ class Term {
   render() {
     const { connectDragSource, isDragging } = this.props;
   	return connectDragSource(
-  	  <div className="term">
+  	  <div className="Term">
   	    {this.props.TermValue + " " + this.props.TermUnit}
   	  </div>
   	);

@@ -4,3 +4,8 @@
   justify-content: space-around;
   align-items: center;
 }
+
+.WorkSpaceExprMid {
+  margin: 0px 10px;
+  font-size: 30px;
+}

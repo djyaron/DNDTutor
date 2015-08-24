@@ -32,7 +32,7 @@ class WorkSpaceExpr {
                              ExprA={ExprA.args[0]}
                              ExprB={ExprA.args[1]}
                              ExprType={"Double"} />
-              <div className="WorkSpaceExprMid"> {this.props.ExprMid} </div>
+              <div className="WorkSpaceExprMid">{this.props.ExprMid}</div>
               <WorkSpaceExpr ExprMid={ExprB.op}
                              ExprA={ExprB.args[0]}
                              ExprB={ExprB.args[1]}
@@ -46,7 +46,7 @@ class WorkSpaceExpr {
                              ExprA={ExprA.args[0]}
                              ExprB={ExprA.args[1]}
                              ExprType={"Double"} />
-              <div className="WorkSpaceExprMid"> {this.props.ExprMid} </div>
+              <div className="WorkSpaceExprMid">{this.props.ExprMid}</div>
               <WorkSpaceBox BoxValue={ExprB.value}
                             BoxType={ExprB.name}
                             BoxNumber={ExprB.number} />
@@ -58,7 +58,7 @@ class WorkSpaceExpr {
               <WorkSpaceBox BoxValue={ExprA.value}
                             BoxType={ExprA.name}
                             BoxNumber={ExprA.number} />
-              <div className="WorkSpaceExprMid"> {this.props.ExprMid} </div>
+              <div className="WorkSpaceExprMid">{this.props.ExprMid}</div>
               <WorkSpaceExpr ExprMid={ExprB.op}
                              ExprA={ExprB.args[0]}
                              ExprB={ExprB.args[1]}
@@ -71,7 +71,7 @@ class WorkSpaceExpr {
               <WorkSpaceBox BoxValue={ExprA.value}
                             BoxType={ExprA.name}
                             BoxNumber={ExprA.number} />
-              <div className="WorkSpaceExprMid"> {this.props.ExprMid} </div>
+              <div className="WorkSpaceExprMid">{this.props.ExprMid}</div>
               <WorkSpaceBox BoxValue={ExprB.value}
                             BoxType={ExprB.name}
                             BoxNumber={ExprB.number} />
