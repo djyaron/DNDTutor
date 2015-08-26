@@ -7,11 +7,21 @@ import Term from '../Term';
 
 import CollectionPaneStore from '../../stores/CollectionPaneStore';
 
-var ExpPlus = "+";
-var TermValueZero = 0;
-var TermValueOne = 1;
-var TermUnitZero = "UZ";
-var TermUnitOne = "UO";
+var Templates = [
+  {Type:"+",ExpA:"Empty",ExpB:"Empty"},
+  {Type:"-",ExpA:"Empty",ExpB:"Empty"},
+  {Type:"*",ExpA:"Empty",ExpB:"Empty"},
+  {Type:"/",ExpA:"Empty",ExpB:"Empty"}
+];
+
+var Givens = [
+  {ValueTop:100,UnitTop:"g H2O2"},
+  {ValueTop:50,UnitTop:"g H2O"}
+];
+var MolWt = [
+  {ValueTop:34,UnitTop:"g H2O2",ValueBot:1,UnitBot:"mol"},
+  {ValueTop:18,UnitTop:"g H2O",ValueBot:1,UnitBot:"mol"}
+];
 
 function getStateFromStores() {
   return {
@@ -45,10 +55,18 @@ class CollectionPane extends React.Component {
 
   render() {
   	var Collections = this.props.collections.map(function(collection) {
-      return (
-      	<Collection CollType={collection} key={collection} currColl={this.state.currentCollection} />
-      );
+      return ( <Collection CollType={collection} key={collection} currColl={this.state.currentCollection} /> );
     }, this);
+    var TempPane = Templates.map(function(template) {
+      return ( <Expression ExpType={template.Type} key={template.Type} ExpA={template.ExpA} ExpB={template.ExpB} /> );
+    }, this);
+    var GivPane = Givens.map(function(given) {
+      return ( <Term ValueTop={given.ValueTop} UnitTop={given.UnitTop} key={given.ValueTop + given.UnitTop} /> );
+    }, this);
+    var MolWtPane = MolWt.map(function(mw) {
+      return ( <Term ValueTop={mw.ValueTop} UnitTop={mw.UnitTop} ValueBot={mw.ValueBot} UnitBot={mw.UnitBot} key={mw.ValueTop + mw.UnitTop + mw.ValueBot + mw.UnitBot} /> );
+    }, this);
+
     switch (this.state.currentCollection) {
       case "TEMPLATES":
         return (
@@ -57,7 +75,7 @@ class CollectionPane extends React.Component {
               {Collections}
             </div>
             <div className="CollectionCurrent">
-              <Expression ExpType={ExpPlus} ExpA={"Empty"} ExpB={"Empty"} />
+              {TempPane}
             </div>
           </div>
         );
@@ -69,7 +87,7 @@ class CollectionPane extends React.Component {
               {Collections}
             </div>
             <div className="CollectionCurrent">
-              <Term TermValue={TermValueZero} TermUnit={TermUnitZero} />
+              {GivPane}
             </div>
           </div>
         );
@@ -81,7 +99,7 @@ class CollectionPane extends React.Component {
               {Collections}
             </div>
             <div className="CollectionCurrent">
-              <Term TermValue={TermValueOne} TermUnit={TermUnitOne} />
+              {MolWtPane}
             </div>
           </div>
         );

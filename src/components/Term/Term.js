@@ -26,15 +26,19 @@ class Term {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
     isDragging: PropTypes.bool.isRequired,
-    TermValue: PropTypes.number.isRequired,
-    TermUnit: PropTypes.string.isRequired
+    ValueTop: PropTypes.number,
+    UnitTop: PropTypes.string,
+    ValueBot: PropTypes.number,
+    UnitBot: PropTypes.string,
   };
 
   render() {
     const { connectDragSource, isDragging } = this.props;
+    var top = this.props.ValueTop === undefined || this.props.UnitTop === undefined ? "" : this.props.ValueTop + this.props.UnitTop;
+    var bot = this.props.ValueBot === undefined || this.props.UnitBot === undefined ? "" : " / " + this.props.ValueBot + this.props.UnitBot;
   	return connectDragSource(
   	  <div className="Term">
-  	    {this.props.TermValue + " " + this.props.TermUnit}
+  	    {top + bot}
   	  </div>
   	);
   }

@@ -34,33 +34,11 @@ class WorkSpace extends React.Component {
   }
 
 	render() {
-    var et = this.state.exprTree;
-    if (et.args === undefined) {
-      if (et.isConstantNode) {
-        return (
-          <div className="WorkSpace">
-            <WorkSpaceExpr ExprA={{"value":et.value,"name":et.name,"number":et.number}}
-                           ExprType={"Single"} />
-          </div>
-        );
-      } else {
-        return (
-          <div className="WorkSpace">
-            <WorkSpaceExpr ExprA={{"name":et.name,"number":et.number}}
-                           ExprType={"Single"} />
-          </div>
-        );
-      }
-    } else {
-      return (
-        <div className="WorkSpace">
-          <WorkSpaceExpr ExprMid={et.op}
-                         ExprA={et.args[0]}
-                         ExprB={et.args[1]}
-                         ExprType={"Double"} />
-        </div>
-      );
-    }
+    return (
+      <div className="WorkSpace">
+        <WorkSpaceExpr ExprTree={this.state.exprTree} />
+      </div>
+    );
 	}
 
 }
