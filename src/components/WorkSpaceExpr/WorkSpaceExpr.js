@@ -4,6 +4,9 @@ import withStyles from '../../decorators/withStyles';
 
 import WorkSpaceBox from '../WorkSpaceBox';
 
+var EMPTY = "EMP";
+var NONE = "TY";
+
 @withStyles(styles)
 class WorkSpaceExpr {
   static propTypes = {
@@ -12,7 +15,6 @@ class WorkSpaceExpr {
 
   render() {
     var ExprTree = this.props.ExprTree;
-    console.log(ExprTree);
     if (!ExprTree.isOperatorNode) {
       if (ExprTree.nodes === undefined) { return; }
       return (
@@ -25,7 +27,57 @@ class WorkSpaceExpr {
         </div>
       );
     } else {
-      return;
+      var ChildZero = ExprTree.args[0];
+      var ChildOne = ExprTree.args[1];
+      if (ChildZero.isOperatorNode && ChildOne.isOperatorNode) {
+        return (
+          <div className="WorkSpaceExpr">
+            <WorkSpaceExpr ExprTree={ChildZero} />
+            <div className="WorkSpaceExprMid">{ExprTree.op}</div>
+            <WorkSpaceExpr ExprTree={ChildOne} />
+          </div>
+        );
+      } else if (ChildZero.isOperatorNode) {
+        return (
+          <div className="WorkSpaceExpr">
+            <WorkSpaceExpr ExprTree={ChildZero} />
+            <div className="WorkSpaceExprMid">{ExprTree.op}</div>
+            <WorkSpaceBox ValueTop={ChildOne.nodes[0]}
+                          UnitTop={ChildOne.UnitTop}
+                          ValueBot={ChildOne.nodes[1]}
+                          UnitBot={ChildOne.UnitBot}
+                          BoxNumber={ChildOne.number} />
+          </div>
+        );
+      } else if (ChildOne.isOperatorNode) {
+        return (
+          <div className="WorkSpaceExpr">
+            <WorkSpaceBox ValueTop={ChildZero.nodes[0]}
+                          UnitTop={ChildZero.UnitTop}
+                          ValueBot={ChildZero.nodes[1]}
+                          UnitBot={ChildZero.UnitBot}
+                          BoxNumber={ChildZero.number} />
+            <div className="WorkSpaceExprMid">{ExprTree.op}</div>
+            <WorkSpaceExpr ExprTree={ChildOne} />
+          </div>
+        );
+      } else {
+        return (
+          <div className="WorkSpaceExpr">
+            <WorkSpaceBox ValueTop={ChildZero.nodes[0]}
+                          UnitTop={ChildZero.UnitTop}
+                          ValueBot={ChildZero.nodes[1]}
+                          UnitBot={ChildZero.UnitBot}
+                          BoxNumber={ChildZero.number} />
+            <div className="WorkSpaceExprMid">{ExprTree.op}</div>
+            <WorkSpaceBox ValueTop={ChildOne.nodes[0]}
+                          UnitTop={ChildOne.UnitTop}
+                          ValueBot={ChildOne.nodes[1]}
+                          UnitBot={ChildOne.UnitBot}
+                          BoxNumber={ChildOne.number} />
+          </div>
+        );
+      }
     }
   }
 }
