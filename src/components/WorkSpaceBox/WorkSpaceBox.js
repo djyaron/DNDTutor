@@ -8,9 +8,10 @@ import { dropHeldExpression } from '../../actions/ExprTreeActionCreators';
 
 const workSpaceBoxTarget = {
   drop(props) {
-    if (props.ValueTop !== undefined &&
-        props.ValueTop.value === "EMP" &&
-        props.UnitTop === "TY") { dropHeldExpression(props.BoxNumber); }
+    if (props.ValueTop === undefined &&
+        props.ValueBot === undefined &&
+        props.UnitTop === undefined &&
+        props.UnitBot === undefined) { dropHeldExpression(props.BoxNumber); }
     return {};
   }
 };
@@ -27,17 +28,31 @@ class WorkSpaceBox {
   static propTypes = {
     connectDropTarget: PropTypes.func.isRequired,
     isOver: PropTypes.bool.isRequired,
-    ValueTop: PropTypes.object,
-    ValueBot: PropTypes.object,
-    UnitTop: PropTypes.string,
-    UnitBot: PropTypes.string,
+    ValueTop: PropTypes.number,
+    ValueBot: PropTypes.number,
+    UnitTop: PropTypes.arrayOf(PropTypes.string),
+    UnitBot: PropTypes.arrayOf(PropTypes.string),
     BoxNumber: PropTypes.number.isRequired
   };
 
   render() {
     const { connectDropTarget, isOver } = this.props;
-    var top = this.props.ValueTop === undefined || this.props.UnitTop === undefined ? "" : this.props.ValueTop.value + this.props.UnitTop;
-    var bot = this.props.ValueBot === undefined || this.props.UnitBot === undefined ? "" : " / " + this.props.ValueBot.value + this.props.UnitBot;
+    var ValueTop = this.props.ValueTop;
+    var ValueBot = this.props.ValueBot;
+    var UnitTop = this.props.UnitTop;
+    var UnitBot = this.props.UnitBot;
+    if (ValueTop === undefined && ValueBot === undefined &&
+        UnitTop === undefined && UnitBot === undefined) {
+      return connectDropTarget(
+        <div className="WorkSpaceBox">
+          <div className="WorkSpaceBoxWrap">
+            {"EMPTY"}
+          </div>
+        </div>
+      );
+    }
+    var top = ValueTop === undefined || UnitTop === undefined ? "" : ValueTop+UnitTop.join(" ");
+    var bot = this.props.ValueBot === undefined || UnitBot === undefined ? "" : " / "+ValueBot+UnitBot.join(" ");
     return connectDropTarget(
       <div className="WorkSpaceBox">
         <div className="WorkSpaceBoxWrap">

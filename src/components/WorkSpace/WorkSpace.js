@@ -13,6 +13,18 @@ function getStateFromStores() {
   };
 }
 
+function getResult(tree) {
+  if (!tree.isOperatorNode) {
+    if (!tree.isArrayNode ||
+        tree.nodes.length === 0) {
+      return;
+    }
+
+  } else {
+
+  }
+}
+
 @withStyles(styles)
 class WorkSpace extends React.Component {
   constructor(props) {
@@ -34,6 +46,10 @@ class WorkSpace extends React.Component {
   }
 
 	render() {
+    var exprTree = this.state.exprTree;
+    console.log(exprTree);
+    var testResult = getResult(exprTree);
+    console.log(testResult);
     return (
       <div className="WorkSpace">
         <WorkSpaceExpr ExprTree={this.state.exprTree} />

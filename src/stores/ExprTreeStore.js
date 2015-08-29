@@ -14,16 +14,13 @@ function getOpenBoxNum() {
 }
 
 var node = math.expression.node;
-var SymbolNode = node.SymbolNode;
 var ConstantNode = node.ConstantNode;
-var ArrayNode = node.ArrayNode;
+var BlockNode = node.BlockNode;
 
 var CHANGE_EVENT = 'change';
 
-var EMPTY = "EMP";
-var NONE = "TY";
-var exprTree = new ArrayNode([new ConstantNode(EMPTY)]);
-exprTree.UnitTop = NONE;
+var UNDEF = new ConstantNode(undefined);
+var exprTree = new BlockNode([{node:UNDEF,visible:true}, {node:UNDEF,visible:true}]);
 exprTree.number = getOpenBoxNum();
 
 var heldExpr = null;
@@ -36,27 +33,23 @@ function searchArgs(expt, number, props, type) {
     if (!obj.isOperatorNode) {
       if (obj.number === number) {
         if (type === ItemTypes.EXPR) {
-          expt.args[key] = math.parse(props.ExpA + " " + props.ExpType + " " + props.ExpB);
-          expt.args[key].args[0] = new ArrayNode([new ConstantNode(EMPTY)]);
-          expt.args[key].args[0].UnitTop = NONE;
+          expt.args[key] = math.parse(props.ExpA+" "+props.ExpType+" "+props.ExpB);
+          expt.args[key].args[0] = new BlockNode([{node:UNDEF,visible:true}, {node:UNDEF,visible:true}]);
           expt.args[key].args[0].number = getOpenBoxNum();
-          expt.args[key].args[1] = new ArrayNode([new ConstantNode(EMPTY)]);
-          expt.args[key].args[1].UnitTop = NONE;
+          expt.args[key].args[1] = new BlockNode([{node:UNDEF,visible:true}, {node:UNDEF,visible:true}]);
           expt.args[key].args[1].number = getOpenBoxNum();
         } else {
           if (props.ValueTop === undefined && props.ValueBot === undefined) {
             return;
-          } else if (props.ValueTop === undefined) {
-            expt.args[key] = new ArrayNode([new ConstantNode(props.ValueBot)]);
-            expt.args[key].UnitBot = props.UnitBot;
-          } else if (props.ValueBot === undefined) {
-            expt.args[key] = new ArrayNode([new ConstantNode(props.ValueTop)]);
-            expt.args[key].UnitTop = props.UnitTop;
-          } else {
-            expt.args[key] = new ArrayNode([new ConstantNode(props.ValueTop), new ConstantNode(props.ValueBot)]);
-            expt.args[key].UnitTop = props.UnitTop;
-            expt.args[key].UnitBot = props.UnitBot;
           }
+          var TopNode = new ConstantNode(props.ValueTop);
+          var BotNode = new ConstantNode(props.ValueBot);
+          expt.args[key] = new BlockNode([
+            {node: TopNode, visible: true},
+            {node: BotNode, visible: true}
+          ]);
+          expt.args[key].UnitTop = props.UnitTop === undefined ? props.UnitTop : [props.UnitTop];
+          expt.args[key].UnitBot = props.UnitBot === undefined ? props.UnitBot : [props.UnitBot];
           expt.args[key].number = getOpenBoxNum();
         }
       }
@@ -71,6 +64,10 @@ var ExprTreeStore = assign({}, EventEmitter.prototype, {
 
   getExprTree: function() {
     return exprTree;
+  },
+
+  getExprRes: function() {
+
   },
 
   holdExpr: function(props) {
@@ -90,27 +87,23 @@ var ExprTreeStore = assign({}, EventEmitter.prototype, {
     var props = heldExpr.PROPS;
     if (!exprTree.isOperatorNode) {
       if (type === ItemTypes.EXPR) {
-        exprTree = math.parse(props.ExpA + " " + props.ExpType + " " + props.ExpB);
-        exprTree.args[0] = new ArrayNode([new ConstantNode(EMPTY)]);
-        exprTree.args[0].UnitTop = NONE;
+        exprTree = math.parse(props.ExpA+" "+props.ExpType+" "+props.ExpB);
+        exprTree.args[0] = new BlockNode([{node:UNDEF,visible:true}, {node:UNDEF,visible:true}]);
         exprTree.args[0].number = getOpenBoxNum();
-        exprTree.args[1] = new ArrayNode([new ConstantNode(EMPTY)]);
-        exprTree.args[1].UnitTop = NONE;
+        exprTree.args[1] = new BlockNode([{node:UNDEF,visible:true}, {node:UNDEF,visible:true}]);
         exprTree.args[1].number = getOpenBoxNum();
       } else {
         if (props.ValueTop === undefined && props.ValueBot === undefined) {
           return;
-        } else if (props.ValueTop === undefined) {
-          exprTree = new ArrayNode([new ConstantNode(props.ValueBot)]);
-          exprTree.UnitBot = props.UnitBot;
-        } else if (props.ValueBot === undefined) {
-          exprTree = new ArrayNode([new ConstantNode(props.ValueTop)]);
-          exprTree.UnitTop = props.UnitTop;
-        } else {
-          exprTree = new ArrayNode([new ConstantNode(props.ValueTop), new ConstantNode(props.ValueBot)]);
-          exprTree.UnitTop = props.UnitTop;
-          exprTree.UnitBot = props.UnitBot;
         }
+        var TopNode = new ConstantNode(props.ValueTop);
+        var BotNode = new ConstantNode(props.ValueBot);
+        exprTree = new BlockNode([
+          {node: TopNode, visible: true},
+          {node: BotNode, visible: true}
+        ]);
+        exprTree.UnitTop = props.UnitTop === undefined ? props.UnitTop : [props.UnitTop];
+        exprTree.UnitBot = props.UnitBot === undefined ? props.UnitBot : [props.UnitBot];
         exprTree.number = getOpenBoxNum();
       }
     } else {
@@ -147,6 +140,7 @@ ExprTreeStore.dispatchToken = TutPageDispatcher.register(function(payload) {
     case ActionTypes.DROP_PROPS:
       ExprTreeStore.dropHeldExpression(payload.number);
       ExprTreeStore.emitChange();
+
     default:
       // do nothing
   }

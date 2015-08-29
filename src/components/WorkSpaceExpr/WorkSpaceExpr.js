@@ -4,9 +4,6 @@ import withStyles from '../../decorators/withStyles';
 
 import WorkSpaceBox from '../WorkSpaceBox';
 
-var EMPTY = "EMP";
-var NONE = "TY";
-
 @withStyles(styles)
 class WorkSpaceExpr {
   static propTypes = {
@@ -16,12 +13,12 @@ class WorkSpaceExpr {
   render() {
     var ExprTree = this.props.ExprTree;
     if (!ExprTree.isOperatorNode) {
-      if (ExprTree.nodes === undefined) { return; }
+      var Entries = ExprTree.eval().entries;
       return (
         <div className="WorkSpaceExpr">
-          <WorkSpaceBox ValueTop={ExprTree.nodes[0]}
+          <WorkSpaceBox ValueTop={Entries[0]}
                         UnitTop={ExprTree.UnitTop}
-                        ValueBot={ExprTree.nodes[1]}
+                        ValueBot={Entries[1]}
                         UnitBot={ExprTree.UnitBot}
                         BoxNumber={ExprTree.number} />
         </div>
@@ -42,9 +39,9 @@ class WorkSpaceExpr {
           <div className="WorkSpaceExpr">
             <WorkSpaceExpr ExprTree={ChildZero} />
             <div className="WorkSpaceExprMid">{ExprTree.op}</div>
-            <WorkSpaceBox ValueTop={ChildOne.nodes[0]}
+            <WorkSpaceBox ValueTop={ChildOne.eval().entries[0]}
                           UnitTop={ChildOne.UnitTop}
-                          ValueBot={ChildOne.nodes[1]}
+                          ValueBot={ChildOne.eval().entries[1]}
                           UnitBot={ChildOne.UnitBot}
                           BoxNumber={ChildOne.number} />
           </div>
@@ -52,9 +49,9 @@ class WorkSpaceExpr {
       } else if (ChildOne.isOperatorNode) {
         return (
           <div className="WorkSpaceExpr">
-            <WorkSpaceBox ValueTop={ChildZero.nodes[0]}
+            <WorkSpaceBox ValueTop={ChildZero.eval().entries[0]}
                           UnitTop={ChildZero.UnitTop}
-                          ValueBot={ChildZero.nodes[1]}
+                          ValueBot={ChildZero.eval().entries[1]}
                           UnitBot={ChildZero.UnitBot}
                           BoxNumber={ChildZero.number} />
             <div className="WorkSpaceExprMid">{ExprTree.op}</div>
@@ -64,15 +61,15 @@ class WorkSpaceExpr {
       } else {
         return (
           <div className="WorkSpaceExpr">
-            <WorkSpaceBox ValueTop={ChildZero.nodes[0]}
+            <WorkSpaceBox ValueTop={ChildZero.eval().entries[0]}
                           UnitTop={ChildZero.UnitTop}
-                          ValueBot={ChildZero.nodes[1]}
+                          ValueBot={ChildZero.eval().entries[1]}
                           UnitBot={ChildZero.UnitBot}
                           BoxNumber={ChildZero.number} />
             <div className="WorkSpaceExprMid">{ExprTree.op}</div>
-            <WorkSpaceBox ValueTop={ChildOne.nodes[0]}
+            <WorkSpaceBox ValueTop={ChildOne.eval().entries[0]}
                           UnitTop={ChildOne.UnitTop}
-                          ValueBot={ChildOne.nodes[1]}
+                          ValueBot={ChildOne.eval().entries[1]}
                           UnitBot={ChildOne.UnitBot}
                           BoxNumber={ChildOne.number} />
           </div>
