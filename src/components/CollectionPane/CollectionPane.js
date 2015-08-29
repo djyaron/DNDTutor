@@ -15,12 +15,12 @@ var Templates = [
 ];
 
 var Givens = [
-  {ValueTop:100,UnitTop:"g H2O2"},
-  {ValueTop:50,UnitTop:"g H2O"}
+  {ValueTop:100,UnitTop:["g","H2O2"]},
+  {ValueTop:50,UnitTop:["g","H2O"]}
 ];
 var MolWt = [
-  {ValueTop:34,UnitTop:"g H2O2",ValueBot:1,UnitBot:"mol"},
-  {ValueTop:18,UnitTop:"g H2O",ValueBot:1,UnitBot:"mol"}
+  {ValueTop:34,UnitTop:["g","H2O2"],ValueBot:1,UnitBot:["mol"]},
+  {ValueTop:18,UnitTop:["g","H2O"],ValueBot:1,UnitBot:["mol"]}
 ];
 
 function getStateFromStores() {

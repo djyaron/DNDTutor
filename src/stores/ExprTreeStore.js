@@ -27,7 +27,7 @@ var heldExpr = null;
 var TYPE = "TYPE";
 var PROPS = "PROPS";
 
-function searchArgs(expt, number, props, type) {
+function dropHelp(expt, number, props, type) {
   for (var key in expt.args) {
     var obj = expt.args[key];
     if (!obj.isOperatorNode) {
@@ -48,13 +48,13 @@ function searchArgs(expt, number, props, type) {
             {node: TopNode, visible: true},
             {node: BotNode, visible: true}
           ]);
-          expt.args[key].UnitTop = props.UnitTop === undefined ? props.UnitTop : [props.UnitTop];
-          expt.args[key].UnitBot = props.UnitBot === undefined ? props.UnitBot : [props.UnitBot];
+          expt.args[key].UnitTop = props.UnitTop;
+          expt.args[key].UnitBot = props.UnitBot;
           expt.args[key].number = getOpenBoxNum();
         }
       }
     } else {
-      expt.args[key] = searchArgs(expt.args[key], number, props, type);
+      expt.args[key] = dropHelp(expt.args[key], number, props, type);
     }
   }
   return expt;
@@ -102,12 +102,12 @@ var ExprTreeStore = assign({}, EventEmitter.prototype, {
           {node: TopNode, visible: true},
           {node: BotNode, visible: true}
         ]);
-        exprTree.UnitTop = props.UnitTop === undefined ? props.UnitTop : [props.UnitTop];
-        exprTree.UnitBot = props.UnitBot === undefined ? props.UnitBot : [props.UnitBot];
+        exprTree.UnitTop = props.UnitTop;
+        exprTree.UnitBot = props.UnitBot;
         exprTree.number = getOpenBoxNum();
       }
     } else {
-      exprTree = searchArgs(exprTree, number, props, type);
+      exprTree = dropHelp(exprTree, number, props, type);
     }
   },
 

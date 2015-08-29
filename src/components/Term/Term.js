@@ -27,15 +27,15 @@ class Term {
     connectDragSource: PropTypes.func.isRequired,
     isDragging: PropTypes.bool.isRequired,
     ValueTop: PropTypes.number,
-    UnitTop: PropTypes.string,
+    UnitTop: PropTypes.arrayOf(PropTypes.string),
     ValueBot: PropTypes.number,
-    UnitBot: PropTypes.string,
+    UnitBot: PropTypes.arrayOf(PropTypes.string),
   };
 
   render() {
     const { connectDragSource, isDragging } = this.props;
-    var top = this.props.ValueTop === undefined || this.props.UnitTop === undefined ? "" : this.props.ValueTop + this.props.UnitTop;
-    var bot = this.props.ValueBot === undefined || this.props.UnitBot === undefined ? "" : " / " + this.props.ValueBot + this.props.UnitBot;
+    var top = this.props.ValueTop === undefined || this.props.UnitTop === undefined ? "" : this.props.ValueTop + this.props.UnitTop.join(" ");
+    var bot = this.props.ValueBot === undefined || this.props.UnitBot === undefined ? "" : " / " + this.props.ValueBot + this.props.UnitBot.join(" ");
   	return connectDragSource(
   	  <div className="Term">
   	    {top + bot}

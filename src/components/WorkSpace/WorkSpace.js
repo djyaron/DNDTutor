@@ -14,12 +14,19 @@ function getStateFromStores() {
 }
 
 function getResult(tree) {
-  if (!tree.isOperatorNode) {
-    if (!tree.isArrayNode ||
-        tree.nodes.length === 0) {
-      return;
-    }
+  if (tree === undefined) { return; }
 
+  if (!tree.isOperatorNode) {
+    if (!tree.isBlockNode) { return; }
+    var ResultSet = tree.eval();
+    var Entries = ResultSet.entries;
+    if (Entries.length !== 2) { return; }
+    if (Entries[0] === undefined && Entries[1] === undefined &&
+        tree.UnitTop === undefined && tree.UnitBot === undefined) { return; }
+
+    var FracTop = Entries[0] === undefined || tree.UnitTop === undefined ? Entries[0] : Entries[0].toString().concat(tree.UnitTop.join(" "));
+    var FracBot = Entries[1] === undefined || tree.UnitBot === undefined ? Entries[1] : Entries[1].toString().concat(tree.UnitBot.join(" "));
+    return [FracTop, FracBot];
   } else {
 
   }
