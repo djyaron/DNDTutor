@@ -10,8 +10,8 @@ const workSpaceBoxTarget = {
   drop(props) {
     if (props.ValueTop === undefined &&
         props.ValueBot === undefined &&
-        props.UnitTop === undefined &&
-        props.UnitBot === undefined) { dropHeldExpression(props.BoxNumber); }
+        props.UnitTop.length === 0 &&
+        props.UnitBot.length === 0) { dropHeldExpression(props.BoxNumber); }
     return {};
   }
 };
@@ -30,8 +30,8 @@ class WorkSpaceBox {
     isOver: PropTypes.bool.isRequired,
     ValueTop: PropTypes.number,
     ValueBot: PropTypes.number,
-    UnitTop: PropTypes.arrayOf(PropTypes.string),
-    UnitBot: PropTypes.arrayOf(PropTypes.string),
+    UnitTop: PropTypes.arrayOf(PropTypes.string).isRequired,
+    UnitBot: PropTypes.arrayOf(PropTypes.string).isRequired,
     BoxNumber: PropTypes.number.isRequired
   };
 
@@ -41,8 +41,7 @@ class WorkSpaceBox {
     var ValueBot = this.props.ValueBot;
     var UnitTop = this.props.UnitTop;
     var UnitBot = this.props.UnitBot;
-    if (ValueTop === undefined && ValueBot === undefined &&
-        UnitTop === undefined && UnitBot === undefined) {
+    if (ValueTop === undefined && ValueBot === undefined) {
       return connectDropTarget(
         <div className="WorkSpaceBox">
           <div className="WorkSpaceBoxWrap">
@@ -51,8 +50,11 @@ class WorkSpaceBox {
         </div>
       );
     }
-    var top = ValueTop === undefined || UnitTop === undefined ? "" : ValueTop+UnitTop.join(" ");
-    var bot = this.props.ValueBot === undefined || UnitBot === undefined ? "" : " / "+ValueBot+UnitBot.join(" ");
+    var top = ValueTop === undefined ? "" : ValueTop;
+    top += UnitTop.join(" ");
+    var bot = ValueBot === undefined ? "" : ValueBot;
+    bot += UnitBot.join(" ");
+    bot = bot === "" ? bot : " / "+bot;
     return connectDropTarget(
       <div className="WorkSpaceBox">
         <div className="WorkSpaceBoxWrap">

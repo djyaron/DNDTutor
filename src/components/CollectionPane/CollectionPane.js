@@ -15,8 +15,9 @@ var Templates = [
 ];
 
 var Givens = [
-  {ValueTop:100,UnitTop:["g","H2O2"]},
-  {ValueTop:50,UnitTop:["g","H2O"]}
+  {ValueTop:100,UnitTop:["g","H2O2"],UnitBot:[]},
+  {ValueTop:50,UnitTop:["g","H2O"],UnitBot:[]},
+  {ValueTop:50,UnitTop:["g","H2O"],ValueBot:3,UnitBot:[]}
 ];
 var MolWt = [
   {ValueTop:34,UnitTop:["g","H2O2"],ValueBot:1,UnitBot:["mol"]},
@@ -61,7 +62,7 @@ class CollectionPane extends React.Component {
       return ( <Expression ExpType={template.Type} key={template.Type} ExpA={template.ExpA} ExpB={template.ExpB} /> );
     }, this);
     var GivPane = Givens.map(function(given) {
-      return ( <Term ValueTop={given.ValueTop} UnitTop={given.UnitTop} key={given.ValueTop + given.UnitTop} /> );
+      return ( <Term ValueTop={given.ValueTop} UnitTop={given.UnitTop} ValueBot={given.ValueBot} UnitBot={given.UnitBot} key={given.ValueTop + given.UnitTop + given.ValueBot + given.UnitBot} /> );
     }, this);
     var MolWtPane = MolWt.map(function(mw) {
       return ( <Term ValueTop={mw.ValueTop} UnitTop={mw.UnitTop} ValueBot={mw.ValueBot} UnitBot={mw.UnitBot} key={mw.ValueTop + mw.UnitTop + mw.ValueBot + mw.UnitBot} /> );

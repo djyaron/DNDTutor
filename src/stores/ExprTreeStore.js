@@ -21,6 +21,8 @@ var CHANGE_EVENT = 'change';
 
 var UNDEF = new ConstantNode(undefined);
 var exprTree = new BlockNode([{node:UNDEF,visible:true}, {node:UNDEF,visible:true}]);
+exprTree.UnitTop = [];
+exprTree.UnitBot = [];
 exprTree.number = getOpenBoxNum();
 
 var heldExpr = null;
@@ -35,8 +37,12 @@ function dropHelp(expt, number, props, type) {
         if (type === ItemTypes.EXPR) {
           expt.args[key] = math.parse(props.ExpA+" "+props.ExpType+" "+props.ExpB);
           expt.args[key].args[0] = new BlockNode([{node:UNDEF,visible:true}, {node:UNDEF,visible:true}]);
+          expt.args[key].args[0].UnitTop = [];
+          expt.args[key].args[0].UnitBot = [];
           expt.args[key].args[0].number = getOpenBoxNum();
           expt.args[key].args[1] = new BlockNode([{node:UNDEF,visible:true}, {node:UNDEF,visible:true}]);
+          expt.args[key].args[1].UnitTop = [];
+          expt.args[key].args[1].UnitBot = [];
           expt.args[key].args[1].number = getOpenBoxNum();
         } else {
           if (props.ValueTop === undefined && props.ValueBot === undefined) {
@@ -89,8 +95,12 @@ var ExprTreeStore = assign({}, EventEmitter.prototype, {
       if (type === ItemTypes.EXPR) {
         exprTree = math.parse(props.ExpA+" "+props.ExpType+" "+props.ExpB);
         exprTree.args[0] = new BlockNode([{node:UNDEF,visible:true}, {node:UNDEF,visible:true}]);
+        exprTree.args[0].UnitTop = [];
+        exprTree.args[0].UnitBot = [];
         exprTree.args[0].number = getOpenBoxNum();
         exprTree.args[1] = new BlockNode([{node:UNDEF,visible:true}, {node:UNDEF,visible:true}]);
+        exprTree.args[1].UnitTop = [];
+        exprTree.args[1].UnitBot = [];
         exprTree.args[1].number = getOpenBoxNum();
       } else {
         if (props.ValueTop === undefined && props.ValueBot === undefined) {
