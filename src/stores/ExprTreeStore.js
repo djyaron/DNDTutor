@@ -72,10 +72,6 @@ var ExprTreeStore = assign({}, EventEmitter.prototype, {
     return exprTree;
   },
 
-  getExprRes: function() {
-
-  },
-
   holdExpr: function(props) {
     heldExpr = {};
     heldExpr[TYPE] = ItemTypes.EXPR;

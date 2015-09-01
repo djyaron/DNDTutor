@@ -5,8 +5,17 @@
 	box-sizing: border-box;
 
 	flex: 0 1 70%;
+  flex-flow: column nowrap;
   display: inherit;
 
   height: 90%;
   justify-content: center;
+  align-items: center;
+}
+
+.Answer {
+  margin: 10px 0px;
+  font-family: inherit;
+  font-size: 20px;
+  font-style: italic;
 }

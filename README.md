@@ -148,3 +148,7 @@ the file is. Name the test by appending `-test.js` to the js file.
 ### License
 
 The MIT License © Konstantin Tarkus ([@koistya](https://twitter.com/koistya)), [Kriasoft](http://www.kriasoft.com)
+
+### Authoring a problem in DNDTutor
+
+Authoring a problem should be done in src/components/TutPage/TutPage.js

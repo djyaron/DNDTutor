@@ -212,6 +212,10 @@ function compileTree(tree) {
 
 @withStyles(styles)
 class WorkSpace extends React.Component {
+  static propTypes = {
+    solution: PropTypes.arrayOf(PropTypes.string).isRequired
+  };
+
   constructor(props) {
     super(props);
     this.state = getStateFromStores();
@@ -232,7 +236,6 @@ class WorkSpace extends React.Component {
 
 	render() {
     var exprTree = this.state.exprTree;
-    console.log(exprTree);
     var emptyCheck = exprTree.filter(function(node) {
       return node.isBlockNode &&
              node.eval().entries[0] === undefined &&
@@ -242,7 +245,23 @@ class WorkSpace extends React.Component {
     }).length !== 0;
     if (!emptyCheck) {
       var compiled = compileTree(exprTree);
-      console.log(compiled);
+
+      var actual;
+      if (compiled == undefined || compiled[0] === "") {
+        actual = "N/A";
+      } else {
+        actual = compiled[1] === "" ? compiled[0] : compiled.join(" / ");
+      }
+
+      var solution = this.props.solution;
+      var answer = "You got " + actual + ". The correct answer is " + solution.join(" / ");
+      answer += compiled != undefined && compiled[0] == solution[0] && compiled[1] == solution[1] ? "!" : ".";
+      return (
+        <div className="WorkSpace">
+          <div className="Answer">{answer}</div>
+          <WorkSpaceExpr ExprTree={this.state.exprTree} />
+        </div>
+      );
     }
     return (
       <div className="WorkSpace">

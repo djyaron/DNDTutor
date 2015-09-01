@@ -7,23 +7,6 @@ import Term from '../Term';
 
 import CollectionPaneStore from '../../stores/CollectionPaneStore';
 
-var Templates = [
-  {Type:"+",ExpA:"Empty",ExpB:"Empty"},
-  {Type:"-",ExpA:"Empty",ExpB:"Empty"},
-  {Type:"*",ExpA:"Empty",ExpB:"Empty"},
-  {Type:"/",ExpA:"Empty",ExpB:"Empty"}
-];
-
-var Givens = [
-  {ValueTop:100,UnitTop:["g","H2O2"],UnitBot:[]},
-  {ValueTop:50,UnitTop:["g","H2O"],UnitBot:[]},
-  {ValueTop:50,UnitTop:["g","H2O"],ValueBot:3,UnitBot:[]}
-];
-var MolWt = [
-  {ValueTop:34,UnitTop:["g","H2O2"],ValueBot:1,UnitBot:["mol"]},
-  {ValueTop:18,UnitTop:["g","H2O"],ValueBot:1,UnitBot:["mol"]}
-];
-
 function getStateFromStores() {
   return {
     currentCollection: CollectionPaneStore.getCurrentCollection()
@@ -33,7 +16,10 @@ function getStateFromStores() {
 @withStyles(styles)
 class CollectionPane extends React.Component {
   static propTypes = {
-    collections: PropTypes.array.isRequired
+    collections: PropTypes.array.isRequired,
+    templates: PropTypes.array.isRequired,
+    givens: PropTypes.array.isRequired,
+    molwt: PropTypes.array.isRequired
   };
 
   constructor(props) {
@@ -55,6 +41,9 @@ class CollectionPane extends React.Component {
   }
 
   render() {
+    var Templates = this.props.templates;
+    var Givens = this.props.givens;
+    var MolWt = this.props.molwt;
   	var Collections = this.props.collections.map(function(collection) {
       return ( <Collection CollType={collection} key={collection} currColl={this.state.currentCollection} /> );
     }, this);
